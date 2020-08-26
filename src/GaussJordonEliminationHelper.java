@@ -134,7 +134,7 @@ public class GaussJordonEliminationHelper {
 			Fraction[] sumArray = new Fraction[R1.length];
 			for(int i = 0; i < sumArray.length; i++) {
 				sumArray[i] = R1[i].add(R2[i]);
-				//System.out.println(R1[i] + " + " + R2[i] + " = " + sumArray[i]);
+				System.out.println(R1[i] + " + " + R2[i] + " = " + sumArray[i]);
 			}
 			return sumArray;
 		}
@@ -144,7 +144,7 @@ public class GaussJordonEliminationHelper {
 			for(int i = 0; i < newArray.length; ++i) {
 				Fraction temp = array[row][i];
 				newArray[i] = array[row][i].multiply(multiplier);
-				System.out.println(array[row][i] + " * " + temp + " = " + newArray[i]);
+				System.out.println(multiplier + " * " + temp + " = " + newArray[i]);
 			}
 			return newArray;
 		}
