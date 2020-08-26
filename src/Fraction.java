@@ -59,7 +59,9 @@ public class Fraction {
 			Fraction fraction = (Fraction)obj;
 			return fraction.denominator == denominator && fraction.numerator == numerator;
 		} else if (obj instanceof Double) {
-			return Math.abs(numerator * 1.0 / denominator - (Double)obj) < 0.000000; 
+			return Math.abs(numerator * 1.0 / denominator - (Double)obj) <= 0.000000;
+		} else if (obj instanceof Integer) {
+			return Math.abs(numerator * 1.0 / denominator - (Integer)obj) <= 0.000000; 
 		}
 		return false;
 	}

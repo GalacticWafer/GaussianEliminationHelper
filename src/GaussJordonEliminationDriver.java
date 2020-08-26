@@ -56,6 +56,8 @@ public class GaussJordonEliminationDriver {
 				matrix.changeRow(r1, multipleA, operand, r2, multipleB, rNew);
 			}
 		}
+		System.out.println("\nFinal matrix:\n" + matrix + "\nThe matrix has been reduced! Good job!");
+		System.out.println(matrix.variables());
 	}
 	
 	private static double fraction(int i, int i1) {

@@ -58,21 +58,34 @@ public class GaussJordonEliminationHelper {
 		return matrix.getRow(row - 1);
 	}
 	
-	public void changeRow(String s) {
-		//"2/1r1-1/1r3->r1"
-		Fraction multiplier1 = Fraction.inputFraction(s.substring(0, s.trim().indexOf('r')));
-		s = s.substring(s.trim().indexOf('r') + 1).trim();
-		char operand = (s.contains("+")) ? '+' : '-';
-		String test = s.substring(0, s.trim().indexOf(operand)); 
-		int row1 = Integer.parseInt(test);
-		s = s.substring(s.indexOf(operand) + 1).trim();
-		Fraction multiplier2 = Fraction.inputFraction(s.trim().substring(0, s.trim().indexOf('r')));
-		s = s.substring(s.trim().indexOf('r') + 1).trim();
-		int row2 = Integer.parseInt(s.trim().substring(0, s.indexOf('>') - 1));
-		s = s.substring(s.indexOf('r') + 1).trim();
-		int newRow = Integer.parseInt(s.trim());
-		changeRow(row1, multiplier1, operand, row2, multiplier2, newRow);
+	public String variables() {
+		return matrix.variables();
 	}
+	
+	//public void changeRow(String s) {
+	//	//"2/1r1-1/1r3->r1"
+	//	String r = "r";
+	//	String fractionBar = "/";
+	//	String plus = "+";
+	//	String minus = "-";
+	//	String arrow = "->";
+	//	
+	//	int newRow = Integer.parseInt(s.substring(s.indexOf(arrow) + 3));
+	//	s = s.substring(0, s.indexOf(arrow));
+	//	
+	//	String tempString =
+	//	int row2 = Integer.parseInt(s.substring(s.substring(s.indexOf(r,s.indexOf(r) + 1)), 1);
+	//	Fraction multiplier1 = Fraction.inputFraction(s.substring(0, s.trim().indexOf('r')));
+	//	s = s.substring(s.trim().indexOf('r') + 1).trim();
+	//	char operand = (s.contains("+")) ? '+' : '-';
+	//	String test = s.substring(0, s.trim().indexOf(operand)); 
+	//	int row1 = Integer.parseInt(test);
+	//	s = s.substring(s.indexOf(operand) + 1).trim();
+	//	Fraction multiplier2 = Fraction.inputFraction(s.trim().substring(0, s.trim().indexOf('r')));
+	//	s = s.substring(s.trim().indexOf('r') + 1).trim();
+	//	s = s.substring(s.indexOf('r') + 1).trim();
+	//	changeRow(row1, multiplier1, operand, row2, multiplier2, newRow);
+	//}
 	
 	private class Matrix {
 		private Fraction[][] array;
@@ -121,6 +134,7 @@ public class GaussJordonEliminationHelper {
 			Fraction[] sumArray = new Fraction[R1.length];
 			for(int i = 0; i < sumArray.length; i++) {
 				sumArray[i] = R1[i].add(R2[i]);
+				//System.out.println(R1[i] + " + " + R2[i] + " = " + sumArray[i]);
 			}
 			return sumArray;
 		}
@@ -128,7 +142,9 @@ public class GaussJordonEliminationHelper {
 		public Fraction[] rowMultiply(int row, Fraction multiplier) {
 			Fraction[] newArray = new Fraction[array[row].length];
 			for(int i = 0; i < newArray.length; ++i) {
+				Fraction temp = array[row][i];
 				newArray[i] = array[row][i].multiply(multiplier);
+				System.out.println(array[row][i] + " * " + temp + " = " + newArray[i]);
 			}
 			return newArray;
 		}
@@ -138,7 +154,7 @@ public class GaussJordonEliminationHelper {
 			Fraction[] sumArray = new Fraction[R1.length];
 			for(int i = 0; i < sumArray.length; i++) {
 				sumArray[i] = R1[i].subtract(R2[i]);
-				//System.out.println(R1[i] + " - " + R2[i] + " = " + sumArray[i]);
+				System.out.println(R1[i] + " - " + R2[i] + " = " + sumArray[i]);
 			}
 			System.out.println();
 			return sumArray;
@@ -180,6 +196,14 @@ public class GaussJordonEliminationHelper {
 				}
 			}
 			return true;
+		}
+		
+		public String variables() {
+			String variables = "";
+			for(int i = 0; i < array.length; i++) {
+				variables = ((char)('z' - i)) + " = " + (array[i][N - 1].toString()) + "\n" + variables;
+			}
+			return variables;
 		}
 	}
 }
