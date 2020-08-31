@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Fraction {
@@ -38,9 +37,26 @@ public class Fraction {
 		return fractions;
 	}
 	
-	public static Fraction inputFraction(String input) {
+	public static Fraction parseFraction(String input) {
+		try{
+			if(input.contains("/")){
 				String[] split = input.split("/");
 				return new Fraction(Integer.parseInt(split[0]), Integer.parseInt(split[1]));
+			} else {
+				return new Fraction(Integer.parseInt(input), 1);
+			}
+		} catch(Exception e) {
+			System.out.println("That's not a valid fraction... try again");
+			return new Fraction(1,1);
+		}
+	}
+	
+	public static Fraction nextFraction(Scanner scanner) {
+		return parseFraction(scanner.next());
+	}
+	
+	public static Fraction[][] toFractions(String[][] matrix) {
+		return null;
 	}
 	
 	public int getNumerator() {
